@@ -180,7 +180,7 @@ fun AboutSettingsSection(
         )
         AboutActionRow(
             label = stringResource(R.string.settings_about_github),
-            subtitle = "dergigi/boris-android",
+            subtitle = "nostr-reader/boris-android",
             icon = Icons.Outlined.Code,
             tint = linkTint,
             trailing = Icons.AutoMirrored.Outlined.OpenInNew,

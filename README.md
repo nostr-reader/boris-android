@@ -10,7 +10,7 @@ Login is optional. Amber or a bunker can sign events. Boris never holds an `nsec
 
 <p align="center">
   <a href="https://zapstore.dev/apps/org.dergigi.boris"><img src="docs/badges/get-it-on-zapstore.svg" alt="Get it on Zap Store" height="70"></a>
-  <a href="https://github.com/dergigi/boris-android/releases"><img src="docs/badges/get-it-on-github.png" alt="Get it on GitHub" height="70"></a>
+  <a href="https://github.com/nostr-reader/boris-android/releases"><img src="docs/badges/get-it-on-github.png" alt="Get it on GitHub" height="70"></a>
 </p>
 
 ## Screenshots
@@ -81,7 +81,7 @@ Duplicate checks include prior imports from either service and the library alrea
 
 Boris is free and open source and always will be. Fork it, change it, send a pull request, or just use it.
 
-Come say hi on [Nostr](https://njump.to/boris@dergigi.com). [Report a bug](https://github.com/dergigi/boris-android/issues/new?template=bug_report.yml) or [suggest a feature](https://github.com/dergigi/boris-android/issues/new?template=feature_request.yml). Pull requests run lint and unit tests; same commands as under [Build](#build).
+Come say hi on [Nostr](https://njump.to/boris@dergigi.com). [Report a bug](https://github.com/nostr-reader/boris-android/issues/new?template=bug_report.yml) or [suggest a feature](https://github.com/nostr-reader/boris-android/issues/new?template=feature_request.yml). Pull requests run lint and unit tests; same commands as under [Build](#build).
 
 If you like the work, you can [zap the Boris account](https://njump.to/boris@dergigi.com) directly or [send sats](https://dergigi.com/value/) to the author.
 

@@ -49,7 +49,7 @@ object AboutLinks {
     const val WHY_BORIS_NAME =
         "https://relay.dergigi.com/03e174145e1f410772bb8c3e79b153ac0077fe482d7006b1f0ed67a81d475bb9.png"
     const val NPUB = "npub19802see0gnk3vjlus0dnmfdagusqrtmsxpl5yfmkwn9uvnfnqylqduhr0x"
-    const val GITHUB = "https://github.com/dergigi/boris-android"
+    const val GITHUB = "https://github.com/nostr-reader/boris-android"
     const val BUG_REPORT = "$GITHUB/issues/new?template=bug_report.yml"
     const val FEATURE_REQUEST = "$GITHUB/issues/new?template=feature_request.yml"
     const val VISION =

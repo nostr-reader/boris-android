@@ -37,13 +37,13 @@ class AboutPagesTest {
             AboutLinks.NPUB,
         )
         assertEquals("https://njump.to/${AboutLinks.NPUB}", AboutLinks.nostrUrl)
-        assertEquals("https://github.com/dergigi/boris-android", AboutLinks.GITHUB)
+        assertEquals("https://github.com/nostr-reader/boris-android", AboutLinks.GITHUB)
         assertEquals(
-            "https://github.com/dergigi/boris-android/issues/new?template=bug_report.yml",
+            "https://github.com/nostr-reader/boris-android/issues/new?template=bug_report.yml",
             AboutLinks.BUG_REPORT,
         )
         assertEquals(
-            "https://github.com/dergigi/boris-android/issues/new?template=feature_request.yml",
+            "https://github.com/nostr-reader/boris-android/issues/new?template=feature_request.yml",
             AboutLinks.FEATURE_REQUEST,
         )
         assertTrue(ABOUT_FEATURES.isNotEmpty())
