@@ -499,7 +499,7 @@ class BunkerClient(
         private const val AUTH_SETTLE_MS = 750L
         private const val LOGOUT_TIMEOUT_MS = 8_000L
         private const val CLIENT_METADATA =
-            """{"name":"Boris","url":"https://github.com/dergigi/boris-android"}"""
+            """{"name":"Boris","url":"https://github.com/nostr-reader/boris-android"}"""
 
         private val defaultClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
