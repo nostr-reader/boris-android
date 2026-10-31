@@ -7,6 +7,19 @@ import org.junit.Test
 
 class HtmlToMarkdownTest {
     @Test
+    fun emptyPermalinkDoesNotBecomeVisibleUrl() {
+        val markdown = HtmlToMarkdown.convert(
+            """<h2 id="building"><a href="#building"><span></span></a>Building the Base</h2>""" +
+                """<p><a href="/empty"></a>Read <a href="#building">this section</a>.</p>""",
+            "https://example.com/newsletter",
+        )
+        assertEquals(
+            "## Building the Base\n\nRead [this section](https://example.com/newsletter#building).",
+            markdown,
+        )
+    }
+
+    @Test
     fun convertsParagraphsAndFormatting() {
         val markdown = HtmlToMarkdown.convert(
             "<p>First <strong>bold</strong> and <em>italic</em>.</p><p>Second.</p>",

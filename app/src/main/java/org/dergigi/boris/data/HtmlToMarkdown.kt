@@ -95,13 +95,13 @@ object HtmlToMarkdown {
         ) { m ->
             val text = stripTags(m.groupValues[2]).trim()
             val href = linkHref(m.groupValues[1], baseUrl)
-            if (text.isEmpty()) href else "[$text]($href)"
+            if (text.isEmpty()) "" else "[$text]($href)"
         }
         s = s.replace(Regex("(?is)<a\\s[^>]*href=[\"']([^\"']*)[\"'][^>]*>(.*?)</a>")) { m ->
             val text = stripTags(m.groupValues[2]).trim()
             val href = linkHref(m.groupValues[1], baseUrl)
             when {
-                text.isEmpty() -> href
+                text.isEmpty() -> ""
                 onlyMarkdownImage.matches(text) -> "\n\n$text\n\n"
                 else -> "[$text]($href)"
             }

@@ -223,7 +223,7 @@ import org.dergigi.boris.ui.settings.SettingsViewModel
 import org.dergigi.boris.ui.theme.BorisIcons
 import org.dergigi.boris.ui.theme.rememberDisplayLook
 import coil3.compose.AsyncImage
-import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
+import org.dergigi.boris.data.ReaderMarkdownFlavour
 import org.intellij.markdown.IElementType
 import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.findChildOfType
@@ -909,7 +909,7 @@ internal fun ArticleBody(
     }
     // Rewrite and GFM parse are off the first Ready frame. Until the first
     // Success, keep a spinner so fetch-complete does not flash an empty body.
-    val flavour = remember { GFMFlavourDescriptor() }
+    val flavour = remember { ReaderMarkdownFlavour() }
     val parser = remember(flavour) { MarkdownParser(flavour) }
     val referenceLinkHandler = remember { ReferenceLinkHandlerImpl() }
     val markdownState = rememberMarkdownState(

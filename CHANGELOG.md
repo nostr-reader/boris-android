@@ -9,6 +9,13 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 
 ## [Unreleased]
 
+## [1.6.25] - 2026-10-31
+
+### Fixed
+
+- Keep dollar amounts and the prose between them visible in the reader instead of interpreting them as unsupported math
+- Preserve newsletter article bodies marked as prose, avoiding fallback to site navigation; empty heading permalink links no longer render as raw URLs
+
 ## [1.6.24] - 2026-10-16
 
 ### Fixed

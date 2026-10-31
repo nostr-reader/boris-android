@@ -18,6 +18,36 @@ class ArticleExtractorTest {
     """.trimIndent()
 
     @Test
+    fun newsletterProseSurvivesCleanupWithoutNavigationOrPermalinkIcons() {
+        val html = """
+            <html><body>
+              <header><a href="/">Site logo</a><nav>Mission Funds About</nav></header>
+              <main><article>
+                <header><h1>Newsletter title</h1></header>
+                <div class="newsletter-prose prose prose-lg">
+                  <p>$longBody</p>
+                  <div class="donate-banner not-prose"><a href="/donate">Donate banner</a></div>
+                  <h2 id="building"><a href="#building" aria-hidden="true"><span></span></a>Building the Base</h2>
+                  <p>Read <a href="/details">the details</a>. $longBody</p>
+                  <img src="/chart.png" alt="Chart">
+                </div>
+              </article></main>
+              <footer>Site footer</footer>
+            </body></html>
+        """.trimIndent()
+        val markdown = ArticleExtractor.markdown(html, "https://example.com/newsletter/quarter")
+        assertNotNull(markdown)
+        assertTrue(markdown!!.contains(longBody.trim()))
+        assertTrue(markdown.contains("## Building the Base"))
+        assertTrue(markdown.contains("[the details](https://example.com/details)"))
+        assertTrue(markdown.contains("![Chart](https://example.com/chart.png)"))
+        assertFalse(markdown.contains("Mission"))
+        assertFalse(markdown.contains("Donate banner"))
+        assertFalse(markdown.contains("Site footer"))
+        assertFalse(markdown.contains("#building"))
+    }
+
+    @Test
     fun articleKeepsBodyAndDropsChrome() {
         val node = ArticleExtractor.article(chromeWrapped, "https://example.com/post")
         assertNotNull(node)
