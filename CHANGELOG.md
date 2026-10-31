@@ -9,6 +9,10 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve newsletter article bodies marked as prose, avoiding fallback to site navigation; empty heading permalink links no longer render as raw URLs
+
 ## [1.6.24] - 2026-10-16
 
 ### Fixed

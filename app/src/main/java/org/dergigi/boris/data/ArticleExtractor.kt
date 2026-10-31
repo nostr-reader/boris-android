@@ -57,6 +57,9 @@ object ArticleExtractor {
     }
 
     private fun unlikely(el: Element): Boolean {
+        // Typography containers can hold the article even when their component
+        // name includes a chrome keyword, such as newsletter-prose.
+        if (el.hasClass("prose")) return false
         val hay = "${el.id()} ${el.className()} ${el.attr("itemprop")}"
         return UNLIKELY.containsMatchIn(hay) && !LIKELY.containsMatchIn(hay)
     }
