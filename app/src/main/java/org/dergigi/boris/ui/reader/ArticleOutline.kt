@@ -5,7 +5,7 @@ import org.intellij.markdown.IElementType
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes
 import org.intellij.markdown.ast.ASTNode
-import org.intellij.markdown.flavours.gfm.GFMFlavourDescriptor
+import org.dergigi.boris.data.ReaderMarkdownFlavour
 import org.intellij.markdown.parser.MarkdownParser
 import kotlin.math.abs
 
@@ -21,7 +21,7 @@ object ArticleOutline {
 
     fun parse(markdown: String): List<ArticleOutlineItem> {
         if (markdown.isBlank()) return emptyList()
-        val root = MarkdownParser(GFMFlavourDescriptor()).buildMarkdownTreeFromString(markdown)
+        val root = MarkdownParser(ReaderMarkdownFlavour()).buildMarkdownTreeFromString(markdown)
         val items = mutableListOf<ArticleOutlineItem>()
         walk(root, markdown, items)
         return items
