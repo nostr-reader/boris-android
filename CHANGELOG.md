@@ -9,6 +9,13 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 
 ## [Unreleased]
 
+## [1.6.26] - 2026-11-03
+
+### Fixed
+
+- Select and highlight text across paragraphs and list items, with saved highlights restored across each text block (#272)
+- Improve highlight matching around Markdown list markers, spacing differences, and repeated text
+
 ## [1.6.25] - 2026-10-31
 
 ### Fixed
