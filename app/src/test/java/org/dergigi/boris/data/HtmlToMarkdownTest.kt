@@ -1,11 +1,54 @@
 package org.dergigi.boris.data
 
+import org.intellij.markdown.html.HtmlGenerator
+import org.intellij.markdown.parser.MarkdownParser
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class HtmlToMarkdownTest {
+    @Test
+    fun keepsListLabelsBoldWhenHtmlIncludesTrailingSpace() {
+        val markdown = HtmlToMarkdown.convert(
+            "<ul><li><strong>Speed:</strong> Same work.</li>" +
+                "<li><strong>Altitude: </strong>Going up.</li>" +
+                "<li><strong>Depth:</strong> Going deeper.</li>" +
+                "<li><strong>Range: </strong>Drawing on other fields.</li></ul>",
+        )
+        assertEquals(
+            "- **Speed:** Same work.\n- **Altitude:** Going up.\n" +
+                "- **Depth:** Going deeper.\n- **Range:** Drawing on other fields.",
+            markdown,
+        )
+        val flavour = ReaderMarkdownFlavour()
+        val root = MarkdownParser(flavour).buildMarkdownTreeFromString(markdown)
+        val rendered = HtmlGenerator(markdown, root, flavour).generateHtml()
+        for (label in listOf("Speed", "Altitude", "Depth", "Range")) {
+            assertTrue(rendered.contains("<strong>$label:</strong>"))
+        }
+    }
+
+    @Test
+    fun movesBoundaryWhitespaceOutsideHtmlEmphasis() {
+        for (tag in listOf("strong", "b", "em", "i")) {
+            val marker = if (tag == "strong" || tag == "b") "**" else "*"
+            for (space in listOf(" ", "&nbsp;", "&#32;", "&#x20;", "\u00a0")) {
+                val markdown = HtmlToMarkdown.convert("<p>Before<$tag>${space}word${space}</$tag>after.</p>")
+                assertEquals(
+                    "Before ${marker}word$marker after.",
+                    markdown.replace('\u00a0', ' '),
+                )
+            }
+            assertEquals("Before after.", HtmlToMarkdown.convert("<p>Before<$tag> </$tag>after.</p>"))
+        }
+    }
+
+    @Test
+    fun preservesEmphasisExamplesInCode() {
+        assertEquals("`**word **`", HtmlToMarkdown.convert("<code>**word **</code>"))
+    }
+
     @Test
     fun emptyPermalinkDoesNotBecomeVisibleUrl() {
         val markdown = HtmlToMarkdown.convert(

@@ -9,6 +9,10 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve bold and italic formatting when source HTML includes whitespace inside the emphasis tags
+
 ## [1.6.26] - 2026-11-03
 
 ### Fixed
