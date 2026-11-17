@@ -111,8 +111,8 @@ object HtmlToMarkdown {
                 "\n\n" + "#".repeat(level) + " " + stripTags(m.groupValues[1]).trim() + "\n\n"
             }
         }
-        s = s.replace(Regex("(?is)<(strong|b)\\b[^>]*>(.*?)</\\1>")) { "**${it.groupValues[2]}**" }
-        s = s.replace(Regex("(?is)<(em|i)\\b[^>]*>(.*?)</\\1>")) { "*${it.groupValues[2]}*" }
+        s = s.replace(Regex("(?is)<(strong|b)\\b[^>]*>(.*?)</\\1>")) { emphasis(it.groupValues[2], "**") }
+        s = s.replace(Regex("(?is)<(em|i)\\b[^>]*>(.*?)</\\1>")) { emphasis(it.groupValues[2], "*") }
         s = s.replace(Regex("(?is)<blockquote[^>]*>(.*?)</blockquote>")) { m ->
             val inner = m.groupValues[1]
                 .replace(Regex("(?i)</?p[^>]*>"), "\n")
@@ -173,6 +173,20 @@ object HtmlToMarkdown {
         val body = MarkdownSpacing.normalize(s.replace(Regex("\\n{3,}"), "\n\n").trim())
         val author = byline(html)
         return if (author == null || body.isEmpty()) body else "*$author*\n\n$body"
+    }
+
+    private fun emphasis(html: String, marker: String): String {
+        // HTML permits whitespace inside emphasis, but Markdown delimiters
+        // must touch the text. Decode only whitespace entities here; other
+        // entities must survive until after the remaining HTML is stripped.
+        val content = html.replace(Regex("&(?:nbsp|#\\d+|#[xX][0-9a-fA-F]+);")) {
+            val decoded = decode(it.value)
+            if (decoded.isBlank()) decoded else it.value
+        }
+        val text = content.trim()
+        if (text.isEmpty()) return content
+        return content.takeWhile { it.isWhitespace() } + marker + text + marker +
+            content.takeLastWhile { it.isWhitespace() }
     }
 
     private fun byline(html: String): String? {
